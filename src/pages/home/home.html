@@ -1,0 +1,137 @@
+<!-- header -->
+<ion-header>
+  <ion-navbar text-center hideBackButton>
+    <ion-buttons left>
+      <img class="header_img" src="https://ubisoft-avatars.akamaized.net/{{ dados.ubisoft_id }}/default_146_146.png">
+    </ion-buttons>
+    <img class="logo" [ngClass]="{'fadeoff': hide == true}" src="assets/imgs/logo.jpg">
+    <ion-buttons right>
+      <button ion-button icon-only (click)="hide = true; this.navCtrl.setRoot('IndexPage', {}, {animate: true})">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar no-padding no-margin style="width:100%;">
+    <ion-segment no-padding no-margin [(ngModel)]="icons">
+      <ion-segment-button value="geral">
+        <span>geral</span>
+      </ion-segment-button>
+      <ion-segment-button value="seasons">
+        <span>temporadas</span>
+      </ion-segment-button>
+      <ion-segment-button value="other">
+        <span>conta</span>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<!--  -->
+<!-- conteúdo -->
+<ion-content [ngSwitch]="icons">
+  <!-- geral -->
+  <ion-grid *ngSwitchCase="'geral'">
+    <ion-row>
+      <ion-col col-12>
+        <!-- geral -->
+        <ion-card>
+          <ion-card-header text-center>
+            <h2><b>Estatísticas Gerais</b></h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row text-center>
+              <ion-col col-4>
+                <p>Europa</p>
+                <img src="assets/imgs/ranks/{{ seasons.seasons.wind_bastion.regions.emea[0].rank}}.svg">
+                <p *ngIf="seasons.seasons.wind_bastion.regions.emea[0].rank != 0">{{
+                  seasons.seasons.wind_bastion.regions.emea[0].mmr | number:'1.0-0' }}</p>
+                <p *ngIf="seasons.seasons.wind_bastion.regions.emea[0].rank == 0">0</p>
+              </ion-col>
+              <ion-col col-4>
+                <p>América</p>
+                <img src="assets/imgs/ranks/{{ seasons.seasons.wind_bastion.regions.ncsa[0].rank}}.svg">
+                <p *ngIf="seasons.seasons.wind_bastion.regions.ncsa[0].rank != 0">{{
+                  seasons.seasons.wind_bastion.regions.ncsa[0].mmr | number:'1.0-0'}}</p>
+                <p *ngIf="seasons.seasons.wind_bastion.regions.ncsa[0].rank == 0">0</p>
+              </ion-col>
+              <ion-col col-4>
+                <p>Ásia</p>
+                <img src="assets/imgs/ranks/{{ seasons.seasons.wind_bastion.regions.apac[0].rank}}.svg">
+                <p *ngIf="seasons.seasons.wind_bastion.regions.apac[0].rank != 0">{{
+                  seasons.seasons.wind_bastion.regions.apac[0].mmr | number:'1.0-0'}}</p>
+                <p *ngIf="seasons.seasons.wind_bastion.regions.apac[0].rank == 0">0</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <!-- casul -->
+        <ion-card>
+          <ion-card-header text-center>
+            <h2><b>Estatísticas Competitivo</b></h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row text-center>
+              <ion-col col-4>
+                <p><b>{{ dados.stats[0].queue.ranked.kills }}</b></p>
+                <p>Abates</p>
+              </ion-col>
+              <ion-col col-4>
+                <p><b>{{ dados.stats[0].queue.ranked.deaths }}</b></p>
+                <p>Mortes</p>
+              </ion-col>
+              <ion-col col-4>
+                <p><b>{{ dados.stats[0].queue.ranked.kd | number:'1.1-2' }}</b></p>
+                <p>K/D</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <!-- ranqueada -->
+        <ion-card>
+          <ion-card-header text-center>
+            <h2><b>Estatísticas Casual</b></h2>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row text-center>
+              <ion-col col-4>
+                <p><b>{{ dados.stats[0].queue.casual.kills }}</b></p>
+                <p>Abates</p>
+              </ion-col>
+              <ion-col col-4>
+                <p><b>{{ dados.stats[0].queue.casual.deaths }}</b></p>
+                <p>Mortes</p>
+              </ion-col>
+              <ion-col col-4>
+                <p><b>{{ dados.stats[0].queue.casual.kd | number:'1.1-2' }}</b></p>
+                <p>K/D</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--  -->
+  <!-- seasons -->
+  <ion-grid *ngSwitchCase="'seasons'">
+    <ion-row>
+      <ion-col col-12>
+        <ion-card *ngFor="let season of seasonsOrd">
+          <ion-card-header class="seasons_header" no-padding>
+            <span>{{ seasons.seasons[season].name }}</span>
+            <img src="assets/imgs/seasons/{{ seasons.seasons[season].key }}.jpg">
+          </ion-card-header>
+          {{ seasons.seasons[season].key }}
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--  -->
+  <!-- other -->
+  <ion-grid *ngSwitchCase="'other'">
+    <ion-row>
+      <ion-col col-12>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

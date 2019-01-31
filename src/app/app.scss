@@ -1,0 +1,14 @@
+.fadeoff {
+    animation: fade 0.25s ease-out;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1;
+        transition: 500ms;
+    }
+    to {
+        opacity: 0;
+        transition: 500ms;
+    }
+}

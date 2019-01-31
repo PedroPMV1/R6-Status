@@ -1,0 +1,80 @@
+<ion-content no-padding>
+  <ion-grid no-padding>
+    <ion-row no-padding>
+      <!-- card -->
+      <ion-col class="user-col" col-12 col-lg-4 offset-lg-4 *ngIf="hide == false">
+        <ion-card>
+          <ion-card-header>
+            <img src="assets/imgs/logo.jpg" alt="logo">
+          </ion-card-header>
+          <ion-card-content>
+
+            <ion-row padding text-center>
+              <ion-col col-4>
+                <!-- ps4 -->
+                <input name="platform" id="platform1" type="radio" value="ps4" [(ngModel)]="user.platform" [checked]="user.platform == 'ps4'">
+                <label class="ps4_label" for="platform1">
+                  <ion-icon [ngClass]="{'ps4_checked': user.platform == 'ps4'}" name="logo-playstation"></ion-icon>
+                </label>
+              </ion-col>
+              <ion-col col-4>
+                <!-- xbox -->
+                <input name="platform" id="platform2" type="radio" value="xbox" [(ngModel)]="user.platform" [checked]="user.platform == 'xbox'">
+                <label class="ps4_label" for="platform2">
+                  <ion-icon [ngClass]="{'xbox_checked': user.platform == 'xbox'}" name="logo-xbox"></ion-icon>
+                </label>
+              </ion-col>
+              <ion-col col-4>
+                <!-- pc -->
+                <input name="platform" id="platform3" type="radio" value="pc" [(ngModel)]="user.platform" [checked]="user.platform == 'pc'">
+                <label class="ps4_labe3" for="platform3">
+                  <ion-icon [ngClass]="{'pc_checked': user.platform == 'pc'}" name="logo-windows"></ion-icon>
+                </label>
+              </ion-col>
+            </ion-row>
+
+            <input type="text" [(ngModel)]="user.name" [ngClass]="{'ps4holder': user.platform == 'ps4', 'xboxholder': user.platform == 'xbox', 'pcholder': user.platform == 'pc'}"
+              placeholder="Usuário">
+            <button id="button" [disabled]="user.name.length < 3" (click)="get()">Pesquisar</button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <!-- list -->
+      <ion-col class="list-col" *ngIf="hide == true">
+
+        <ion-list>
+          <h3 text-center>Usuários</h3>
+          <ion-scroll scrollY="false">
+            <ion-item (click)="showDetails(user.uplay_id)" no-padding class="users-item" *ngFor="let user of users">
+              <ion-row>
+                <ion-col col-2>
+                  <img class="profile_picture" src="https://ubisoft-avatars.akamaized.net/{{ user.ubisoft_id }}/default_146_146.png">
+                </ion-col>
+                <ion-col col-9>
+                  <p>Nome: {{ user.username }}</p>
+                  <p class="data_under" *ngIf="!user.progressionStats">Level: N/A</p>
+                  <p class="data_under" *ngIf="user.progressionStats">Level: {{ user.progressionStats.level }}</p>
+                  <p class="data_under" *ngIf="!user.genericStats">W/L: N/A</p>
+                  <p class="data_under" *ngIf="user.genericStats">W/L: {{ user.genericStats.wins /
+                    user.genericStats.losses |
+                    number:'1.1-2'}}</p>
+                  <p class="data_under" class="data_under" *ngIf="!user.genericStats">K/D: N/A</p>
+                  <p class="data_under" *ngIf="user.genericStats">K/D: {{ user.genericStats.kills /
+                    user.genericStats.deaths |
+                    number:'1.1-2'}}</p>
+                </ion-col>
+                <ion-col col-1 align="center">
+                  <ion-icon class="next" name="ios-arrow-forward-outline"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-scroll>
+          <ion-item no-lines class="back_btn">
+            <button (click)="hide=false">Voltar</button>
+          </ion-item>
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

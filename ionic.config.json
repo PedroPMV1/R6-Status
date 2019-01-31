@@ -1,0 +1,7 @@
+{
+  "name": "r6app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
