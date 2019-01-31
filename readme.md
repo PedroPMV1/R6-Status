@@ -12,6 +12,9 @@ Clone o projeto e após isso execute os seguintes comandos:
 
 ## Screenshots
 
-![print 1](print1.jpg)
-![print 2](print2.jpg)
-![print 2](print3.jpg)
+   <center><img src="print1.jpg" ...></center>
+
+   <center><img src="print2.jpg" ...></center>
+   
+   <center><img src="print3.jpg" ...></center>
+
